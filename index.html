@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Filament Tiers v1.6</title>
+  <title>Filament Tiers v1.7</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -73,7 +73,7 @@
 </head>
 <body>
 
-<h2>Filament Tiers — Version 1.6</h2>
+<h2>Filament Tiers — Version 1.7</h2>
 <p id="visitor-counter">Loading visitor count...</p>
 
 <table id="filament-table">
@@ -191,7 +191,11 @@ createTable();
 </script>
 
 <script>
-  fetch('https://api.countapi.xyz/hit/bpchristensen.github.io/Zacksfilamentlist/visits')
+  // Increment and fetch visit count
+  fetch('https://api.countapi.xyz/update/zacksfilamentlist/homepage/?amount=1')
+    .then(() => {
+      return fetch('https://api.countapi.xyz/get/zacksfilamentlist/homepage');
+    })
     .then(res => res.json())
     .then(res => {
       document.getElementById('visitor-counter').textContent = `Visitor count: ${res.value}`;
