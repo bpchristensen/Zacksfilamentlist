@@ -1,79 +1,192 @@
-<table border="1" cellpadding="10" cellspacing="0" style="border-collapse: collapse; width: 100%;">
-  <thead style="background-color: #333; color: white;">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Filament Tiers v1.3</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+    table {
+      border-collapse: collapse;
+      width: 100%;
+    }
+    th, td {
+      border: 1px solid #ccc;
+      padding: 10px;
+      text-align: center;
+      cursor: pointer;
+    }
+    th {
+      background-color: #333;
+      color: white;
+    }
+    td:hover {
+      background-color: #f0f0f0;
+    }
+
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 10;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgba(0,0,0,0.5);
+    }
+
+    .modal-content {
+      background-color: #fff;
+      margin: 15% auto;
+      padding: 20px;
+      border: 1px solid #888;
+      width: 90%;
+      max-width: 400px;
+      border-radius: 8px;
+    }
+
+    .close {
+      color: #aaa;
+      float: right;
+      font-size: 22px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    .close:hover {
+      color: black;
+    }
+
+    @media (max-width: 600px) {
+      th, td {
+        font-size: 14px;
+        padding: 6px;
+      }
+      .modal-content {
+        width: 95%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<h2>Filament Tiers — Version 1.3</h2>
+<table id="filament-table">
+  <thead>
     <tr>
-      <th style="width: 80px;">Tier</th>
-      <th colspan="20">
-        Filament Types (hover for details)
-        <span style="font-weight: normal; font-size: 0.9em;">&nbsp;— Version 1.3</span>
-      </th>
+      <th>Tier</th>
+      <th colspan="20">Filament Types (click for details)</th>
     </tr>
   </thead>
   <tbody>
-    <!-- S Tier -->
-    <tr>
-      <td><strong>S</strong></td>
-      <td title="PCTG: Like PETG but stronger, easier to print, more impact resistant, and better layer adhesion. Nearly a perfect filament.">PCTG</td>
-      <td title="Tough PLA: PLA blended with PBT. Impact-resistant, resists shattering and heat, great for light-duty functional parts.">Tough PLA</td>
-      <td title="Carbon Fiber PETG: Less warping than regular PETG, strong and stiff, ideal for functional prototypes.">CF PETG</td>
-      <td title="Carbon Fiber PLA: Matte finish, crisp detail, stiffer but more brittle than standard PLA. Requires hardened nozzle.">CF PLA</td>
-      <td title="High-Speed PLA: Lower melting temp, faster flow rate for ultra-quick prints. May be heat sensitive.">High-Speed PLA</td>
-      <td title="Glass-Filled Nylon: Very rigid, abrasion- and heat-resistant, often used as a substitute for machined aluminum. Needs high-end printer.">Glass-Filled Nylon</td>
-      <td title="TPU (High Durometer): Extremely tough and flexible, nearly indestructible, perfect for combat bots and rugged applications.">TPU (High Durometer)</td>
-    </tr>
-
-    <!-- A Tier -->
-    <tr>
-      <td><strong>A</strong></td>
-      <td title="ULTEM 1010: Extremely tough, stable, and heat-resistant. Great across all metrics but very hard to print.">ULTEM 1010</td>
-      <td title="ASA: Weather-resistant, UV-stable, tough like ABS but easier to print and with a matte finish.">ASA</td>
-      <td title="CF Polycarbonate: Very stiff and strong; good for high-load parts. Requires powerful extruder and high temps.">CF PC</td>
-      <td title="PEKK: Super strong, chemically resistant, easier to print than PEEK.">PEKK</td>
-      <td title="PC-PBT: Easy-to-print polycarbonate blend, strong and resilient even in cold weather.">PC-PBT</td>
-      <td title="SEBS: Stretchy and flexible, smooth to print. A modern alternative to TPE with better results.">SEBS</td>
-      <td title="PETG: General-purpose filament; tougher than PLA, transparent options available, but tricky with overhangs.">PETG</td>
-    </tr>
-
-    <!-- B Tier -->
-    <tr>
-      <td><strong>B</strong></td>
-      <td title="PSU: Thermally and chemically stable. Can be sterilized. Good for lab or medical use.">PSU</td>
-      <td title="PA6 Nylon: Strong and flexible. Hard to print and very hygroscopic.">PA6 Nylon</td>
-      <td title="PA12 Nylon: Hotter and stiffer than PA6. Best for precision rigid parts.">PA12 Nylon</td>
-      <td title="CF Nylon (PA6): Stiffens PA6 and reduces warping. Still requires high-end hardware.">CF Nylon</td>
-      <td title="GF Polypropylene: Tough, lightweight, difficult to print. Often used industrially.">GF-PP</td>
-      <td title="ABS: Strong, tough, vapor-smoothable. Warps heavily and off-gasses.">ABS</td>
-      <td title="HIPS: Lightweight, slightly flexible, useful as support material with ASA and ABS.">HIPS</td>
-      <td title="CF PET: A stiffer, more precise version of PETG, with better surface quality.">CF PET</td>
-      <td title="PET: Tougher and shinier than PETG. High temp and hard to print.">PET</td>
-      <td title="Wood PLA: Contains wood particles. Visually convincing but weak and moisture-sensitive.">Wood PLA</td>
-      <td title="Matte PLA: Plant-fiber composite, paintable and springy, but prone to jamming.">Matte PLA</td>
-      <td title="Silk PLA: Shiny, decorative filament with poor strength. Used for visual models.">Silk PLA</td>
-      <td title="Standard PLA: Very easy to print, stiff, but brittle and not heat-resistant.">PLA</td>
-    </tr>
-
-    <!-- C Tier -->
-    <tr>
-      <td><strong>C</strong></td>
-      <td title="PEEK: Strongest printable plastic, but extremely hard to print and very expensive.">PEEK</td>
-      <td title="CF Superpolymers: Composite versions of ultra-strong plastics. Require exotic hardware.">CF Superpolymers</td>
-      <td title="PPS: Chemically resistant up to 200°C. Expensive but practical for lab use.">PPS</td>
-      <td title="PMMA (Acrylic): Extremely clear, UV resistant, brittle and difficult to print.">PMMA</td>
-      <td title="OBC: Flexible, tough, less warping than PP, but bed adhesion is poor.">OBC</td>
-      <td title="Nylon/PETG Alloys: Attempts to combine toughness of nylon and printability of PETG. Ends up with both weaknesses.">Nylon-PETG Alloys</td>
-      <td title="TPU 88A: Very flexible, but hard to print and not breathable.">TPU 88A</td>
-    </tr>
-
-    <!-- F Tier -->
-    <tr>
-      <td><strong>F</strong></td>
-      <td title="PVDF: Incredibly chemical-resistant, but releases toxic gas if overheated.">PVDF</td>
-      <td title="POM (Delrin): Very slippery and machinable, but terrible bed adhesion and toxic fumes.">POM</td>
-      <td title="PP (Polypropylene): Lightweight and tough, but impossible to adhere to the bed.">PP</td>
-      <td title="HDPE: Warps aggressively, doesn’t stick to bed, poor layer bonding.">HDPE</td>
-      <td title="TPI (Kapton): Highest heat resistance, impossible to print on hobby machines.">TPI</td>
-      <td title="ULTEM 9085: Inferior to 1010 in every way, still expensive.">ULTEM 9085</td>
-      <td title="Metal PLA: Contains real metal powder, but weak, brittle, and very costly.">Metal PLA</td>
-      <td title="TPE: Very stretchy, but poor print quality and hard to control.">TPE</td>
-    </tr>
+    <!-- Tiers and clickable cells will be inserted by JS -->
   </tbody>
 </table>
+
+<!-- Modal Template -->
+<div id="modal" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="hideModal()">&times;</span>
+    <h3 id="modal-title"></h3>
+    <p id="modal-text"></p>
+  </div>
+</div>
+
+<script>
+const data = {
+  "S": [
+    { name: "PCTG", desc: "Like PETG but stronger, easier to print, more impact resistant, and better layer adhesion. Nearly a perfect filament." },
+    { name: "Tough PLA", desc: "PLA blended with PBT. Impact-resistant, resists shattering and heat, great for light-duty functional parts." },
+    { name: "CF PETG", desc: "Less warping than regular PETG, strong and stiff, ideal for functional prototypes." },
+    { name: "CF PLA", desc: "Matte finish, crisp detail, stiffer but more brittle than standard PLA. Requires hardened nozzle." },
+    { name: "High-Speed PLA", desc: "Lower melting temp, faster flow rate for ultra-quick prints. May be heat sensitive." },
+    { name: "Glass-Filled Nylon", desc: "Very rigid, abrasion- and heat-resistant, often used as a substitute for machined aluminum. Needs high-end printer." },
+    { name: "TPU (High Durometer)", desc: "Extremely tough and flexible, nearly indestructible, perfect for combat bots and rugged applications." }
+  ],
+  "A": [
+    { name: "ULTEM 1010", desc: "Extremely tough, stable, and heat-resistant. Great across all metrics but very hard to print." },
+    { name: "ASA", desc: "Weather-resistant, UV-stable, tough like ABS but easier to print and with a matte finish." },
+    { name: "CF PC", desc: "Very stiff and strong; good for high-load parts. Requires powerful extruder and high temps." },
+    { name: "PEKK", desc: "Super strong, chemically resistant, easier to print than PEEK." },
+    { name: "PC-PBT", desc: "Easy-to-print polycarbonate blend, strong and resilient even in cold weather." },
+    { name: "SEBS", desc: "Stretchy and flexible, smooth to print. A modern alternative to TPE with better results." },
+    { name: "PETG", desc: "General-purpose filament; tougher than PLA, transparent options available, but tricky with overhangs." }
+  ],
+  "B": [
+    { name: "PSU", desc: "Thermally and chemically stable. Can be sterilized. Good for lab or medical use." },
+    { name: "PA6 Nylon", desc: "Strong and flexible. Hard to print and very hygroscopic." },
+    { name: "PA12 Nylon", desc: "Hotter and stiffer than PA6. Best for precision rigid parts." },
+    { name: "CF Nylon", desc: "Stiffens PA6 and reduces warping. Still requires high-end hardware." },
+    { name: "GF-PP", desc: "Tough, lightweight, difficult to print. Often used industrially." },
+    { name: "ABS", desc: "Strong, tough, vapor-smoothable. Warps heavily and off-gasses." },
+    { name: "HIPS", desc: "Lightweight, slightly flexible, useful as support material with ASA and ABS." },
+    { name: "CF PET", desc: "A stiffer, more precise version of PETG, with better surface quality." },
+    { name: "PET", desc: "Tougher and shinier than PETG. High temp and hard to print." },
+    { name: "Wood PLA", desc: "Contains wood particles. Visually convincing but weak and moisture-sensitive." },
+    { name: "Matte PLA", desc: "Plant-fiber composite, paintable and springy, but prone to jamming." },
+    { name: "Silk PLA", desc: "Shiny, decorative filament with poor strength. Used for visual models." },
+    { name: "PLA", desc: "Very easy to print, stiff, but brittle and not heat-resistant." }
+  ],
+  "C": [
+    { name: "PEEK", desc: "Strongest printable plastic, but extremely hard to print and very expensive." },
+    { name: "CF Superpolymers", desc: "Composite versions of ultra-strong plastics. Require exotic hardware." },
+    { name: "PPS", desc: "Chemically resistant up to 200°C. Expensive but practical for lab use." },
+    { name: "PMMA", desc: "Extremely clear, UV resistant, brittle and difficult to print." },
+    { name: "OBC", desc: "Flexible, tough, less warping than PP, but bed adhesion is poor." },
+    { name: "Nylon-PETG Alloys", desc: "Attempts to combine toughness of nylon and printability of PETG. Ends up with both weaknesses." },
+    { name: "TPU 88A", desc: "Very flexible, but hard to print and not breathable." }
+  ],
+  "F": [
+    { name: "PVDF", desc: "Incredibly chemical-resistant, but releases toxic gas if overheated." },
+    { name: "POM", desc: "Very slippery and machinable, but terrible bed adhesion and toxic fumes." },
+    { name: "PP", desc: "Lightweight and tough, but impossible to adhere to the bed." },
+    { name: "HDPE", desc: "Warps aggressively, doesn’t stick to bed, poor layer bonding." },
+    { name: "TPI", desc: "Highest heat resistance, impossible to print on hobby machines." },
+    { name: "ULTEM 9085", desc: "Inferior to 1010 in every way, still expensive." },
+    { name: "Metal PLA", desc: "Contains real metal powder, but weak, brittle, and very costly." },
+    { name: "TPE", desc: "Very stretchy, but poor print quality and hard to control." }
+  ]
+};
+
+function createTable() {
+  const tbody = document.querySelector("#filament-table tbody");
+  for (const tier in data) {
+    const tr = document.createElement("tr");
+    const tdTier = document.createElement("td");
+    tdTier.innerHTML = `<strong>${tier}</strong>`;
+    tr.appendChild(tdTier);
+    data[tier].forEach((item) => {
+      const td = document.createElement("td");
+      td.textContent = item.name;
+      td.onclick = () => showModal(item.name, item.desc);
+      tr.appendChild(td);
+    });
+    tbody.appendChild(tr);
+  }
+}
+
+function showModal(title, text) {
+  document.getElementById("modal-title").textContent = title;
+  document.getElementById("modal-text").textContent = text;
+  document.getElementById("modal").style.display = "block";
+
+  window.onclick = function(event) {
+    const modal = document.getElementById("modal");
+    if (event.target === modal) {
+      modal.style.display = "none";
+    }
+  };
+}
+
+function hideModal() {
+  document.getElementById("modal").style.display = "none";
+}
+
+createTable();
+</script>
+
+</body>
+</html>
