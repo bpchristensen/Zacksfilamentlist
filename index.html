@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Filament Tiers v1.5</title>
+  <title>Filament Tiers v1.6</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -73,10 +73,8 @@
 </head>
 <body>
 
-<h2>Filament Tiers — Version 1.5</h2>
-<p>
-  <img src="https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=bpchristensen.github.io/Zacksfilamentlist&count_bg=%2379C83D&title_bg=%23555555&icon=&icon_color=%23E7E7E7&title=visits&edge_flat=false" alt="Visitor count">
-</p>
+<h2>Filament Tiers — Version 1.6</h2>
+<p id="visitor-counter">Loading visitor count...</p>
 
 <table id="filament-table">
   <thead>
@@ -192,5 +190,15 @@ function hideModal() {
 createTable();
 </script>
 
+<script>
+  fetch('https://api.countapi.xyz/hit/bpchristensen.github.io/Zacksfilamentlist/visits')
+    .then(res => res.json())
+    .then(res => {
+      document.getElementById('visitor-counter').textContent = `Visitor count: ${res.value}`;
+    })
+    .catch(() => {
+      document.getElementById('visitor-counter').textContent = 'Visitor count unavailable.';
+    });
+</script>
 </body>
 </html>
