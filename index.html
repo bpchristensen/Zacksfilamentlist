@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Filament Tiers v1.8</title>
+  <title>Filament Tiers v1.9</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -26,7 +26,6 @@
     td:hover {
       background-color: #f0f0f0;
     }
-
     .modal {
       display: none;
       position: fixed;
@@ -38,7 +37,6 @@
       overflow: auto;
       background-color: rgba(0,0,0,0.5);
     }
-
     .modal-content {
       background-color: #fff;
       margin: 15% auto;
@@ -48,7 +46,6 @@
       max-width: 400px;
       border-radius: 8px;
     }
-
     .close {
       color: #aaa;
       float: right;
@@ -59,7 +56,6 @@
     .close:hover {
       color: black;
     }
-
     @media (max-width: 600px) {
       th, td {
         font-size: 14px;
@@ -72,8 +68,7 @@
   </style>
 </head>
 <body>
-
-<h2>Filament Tiers — Version 1.8</h2>
+<h2>Filament Tiers — Version 1.9</h2>
 <p id="visitor-counter">Loading visitor count...</p>
 
 <table id="filament-table">
@@ -83,12 +78,9 @@
       <th colspan="20">Filament Types (click for details)</th>
     </tr>
   </thead>
-  <tbody>
-    <!-- Tiers and clickable cells will be inserted by JS -->
-  </tbody>
+  <tbody></tbody>
 </table>
 
-<!-- Modal Template -->
 <div id="modal" class="modal">
   <div class="modal-content">
     <span class="close" onclick="hideModal()">&times;</span>
@@ -96,6 +88,36 @@
     <p id="modal-text"></p>
   </div>
 </div>
+
+<!-- Firebase SDK -->
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
+<script>
+  // Your Firebase configuration
+  const firebaseConfig = {
+    apiKey: "AIzaSyBQ5LyqiPsul7Z4ih6tqxMA1wDDd7gIEyA",
+    authDomain: "hitcounter-f82d6.firebaseapp.com",
+    databaseURL: "https://hitcounter-f82d6-default-rtdb.firebaseio.com",
+    projectId: "hitcounter-f82d6",
+    storageBucket: "hitcounter-f82d6.appspot.com",
+    messagingSenderId: "36462497980",
+    appId: "1:36462497980:web:842fbf1340158595a440b9"
+  };
+  firebase.initializeApp(firebaseConfig);
+  const db = firebase.database();
+
+  // Read and update visit count
+  const counterRef = db.ref("visits");
+  counterRef.transaction(current => {
+    return (current || 0) + 1;
+  }, (error, committed, snapshot) => {
+    if (error) {
+      document.getElementById("visitor-counter").textContent = "Visitor count unavailable.";
+    } else {
+      document.getElementById("visitor-counter").textContent = `Visitor count: ${snapshot.val()}`;
+    }
+  });
+</script>
 
 <script>
 const data = {
@@ -174,11 +196,9 @@ function showModal(title, text) {
   document.getElementById("modal-title").textContent = title;
   document.getElementById("modal-text").textContent = text;
   document.getElementById("modal").style.display = "block";
-
   window.onclick = function(event) {
-    const modal = document.getElementById("modal");
-    if (event.target === modal) {
-      modal.style.display = "none";
+    if (event.target === document.getElementById("modal")) {
+      hideModal();
     }
   };
 }
@@ -188,41 +208,6 @@ function hideModal() {
 }
 
 createTable();
-</script>
-
-<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js"></script>
-<script>
-  const firebaseConfig = {
-    apiKey: "AIzaSyBQ5LyqiPsul7Z4ih6tqxMA1wDDd7gIEyA",
-    authDomain: "hitcounter-f82d6.firebaseapp.com",
-    projectId: "hitcounter-f82d6",
-    storageBucket: "hitcounter-f82d6.firebasestorage.app",
-    messagingSenderId: "36462497980",
-    appId: "1:36462497980:web:842fbf1340158595a440b9"
-  };
-
-  firebase.initializeApp(firebaseConfig);
-  const database = firebase.database();
-
-  const hasVisited = localStorage.getItem('visited_filament_counter');
-  const counterRef = database.ref('visits');
-
-  function updateVisitorCount() {
-    counterRef.once('value').then((snapshot) => {
-      let count = snapshot.val() || 0;
-      document.getElementById('visitor-counter').textContent = `Visitor count: ${count}`;
-      if (!hasVisited) {
-        counterRef.set(count + 1);
-        localStorage.setItem('visited_filament_counter', 'true');
-        document.getElementById('visitor-counter').textContent = `Visitor count: ${count + 1}`;
-      }
-    }).catch(() => {
-      document.getElementById('visitor-counter').textContent = 'Visitor count unavailable.';
-    });
-  }
-
-  updateVisitorCount();
 </script>
 </body>
 </html>
