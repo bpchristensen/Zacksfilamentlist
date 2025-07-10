@@ -68,6 +68,7 @@
   </style>
 </head>
 <body>
+
 <h2>Filament Tiers — Version 1.9</h2>
 <p id="visitor-counter">Loading visitor count...</p>
 
@@ -89,36 +90,6 @@
   </div>
 </div>
 
-<!-- Firebase SDK -->
-<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
-<script>
-  // Your Firebase configuration
-  const firebaseConfig = {
-    apiKey: "AIzaSyBQ5LyqiPsul7Z4ih6tqxMA1wDDd7gIEyA",
-    authDomain: "hitcounter-f82d6.firebaseapp.com",
-    databaseURL: "https://hitcounter-f82d6-default-rtdb.firebaseio.com",
-    projectId: "hitcounter-f82d6",
-    storageBucket: "hitcounter-f82d6.appspot.com",
-    messagingSenderId: "36462497980",
-    appId: "1:36462497980:web:842fbf1340158595a440b9"
-  };
-  firebase.initializeApp(firebaseConfig);
-  const db = firebase.database();
-
-  // Read and update visit count
-  const counterRef = db.ref("visits");
-  counterRef.transaction(current => {
-    return (current || 0) + 1;
-  }, (error, committed, snapshot) => {
-    if (error) {
-      document.getElementById("visitor-counter").textContent = "Visitor count unavailable.";
-    } else {
-      document.getElementById("visitor-counter").textContent = `Visitor count: ${snapshot.val()}`;
-    }
-  });
-</script>
-
 <script>
 const data = {
   "S": [
@@ -128,16 +99,16 @@ const data = {
     { name: "CF PLA", desc: "Matte finish, crisp detail, stiffer but more brittle than standard PLA. Requires hardened nozzle." },
     { name: "High-Speed PLA", desc: "Lower melting temp, faster flow rate for ultra-quick prints. May be heat sensitive." },
     { name: "Glass-Filled Nylon", desc: "Very rigid, abrasion- and heat-resistant, often used as a substitute for machined aluminum. Needs high-end printer." },
-    { name: "TPU (High Durometer)", desc: "Extremely tough and flexible, nearly indestructible, perfect for combat bots and rugged applications." }
+    { name: "TPU (High Durometer)", desc: "Extremely tough and flexible, nearly indestructible, perfect for combat bots and rugged applications. <em>TPU is the Chuck Norris of filaments.</em>" }
   ],
   "A": [
     { name: "ULTEM 1010", desc: "Extremely tough, stable, and heat-resistant. Great across all metrics but very hard to print." },
     { name: "ASA", desc: "Weather-resistant, UV-stable, tough like ABS but easier to print and with a matte finish." },
     { name: "CF PC", desc: "Very stiff and strong; good for high-load parts. Requires powerful extruder and high temps." },
-    { name: "PEKK", desc: "Super strong, chemically resistant, easier to print than PEEK." },
+    { name: "PEKK", desc: "Super strong, chemically resistant, easier to print than PEEK. <em>PEKK is the budget version of PEEK. It’s like Coke Zero — still bad for you, but slightly easier to swallow.</em>" },
     { name: "PC-PBT", desc: "Easy-to-print polycarbonate blend, strong and resilient even in cold weather." },
     { name: "SEBS", desc: "Stretchy and flexible, smooth to print. A modern alternative to TPE with better results." },
-    { name: "PETG", desc: "General-purpose filament; tougher than PLA, transparent options available, but tricky with overhangs." }
+    { name: "PETG", desc: "General-purpose filament; tougher than PLA, transparent options available, but tricky with overhangs. <em>Printing PETG is like dating someone with unresolved trauma — it’s strong and useful, but the slightest wrong move and it strings all over the place.</em>" }
   ],
   "B": [
     { name: "PSU", desc: "Thermally and chemically stable. Can be sterilized. Good for lab or medical use." },
@@ -145,13 +116,13 @@ const data = {
     { name: "PA12 Nylon", desc: "Hotter and stiffer than PA6. Best for precision rigid parts." },
     { name: "CF Nylon", desc: "Stiffens PA6 and reduces warping. Still requires high-end hardware." },
     { name: "GF-PP", desc: "Tough, lightweight, difficult to print. Often used industrially." },
-    { name: "ABS", desc: "Strong, tough, vapor-smoothable. Warps heavily and off-gasses." },
-    { name: "HIPS", desc: "Lightweight, slightly flexible, useful as support material with ASA and ABS." },
+    { name: "ABS", desc: "Strong, tough, vapor-smoothable. Warps heavily and off-gasses. <em>ABS stands for ‘Always Be Suffering’.</em>" },
+    { name: "HIPS", desc: "Lightweight, slightly flexible, useful as support material with ASA and ABS. <em>It’s the support material that supports your emotional instability as well.</em>" },
     { name: "CF PET", desc: "A stiffer, more precise version of PETG, with better surface quality." },
     { name: "PET", desc: "Tougher and shinier than PETG. High temp and hard to print." },
-    { name: "Wood PLA", desc: "Contains wood particles. Visually convincing but weak and moisture-sensitive." },
+    { name: "Wood PLA", desc: "Contains wood particles. Visually convincing but weak and moisture-sensitive. <em>It smells like a campfire, prints like a nightmare, and breaks like your dreams of woodworking.</em>" },
     { name: "Matte PLA", desc: "Plant-fiber composite, paintable and springy, but prone to jamming." },
-    { name: "Silk PLA", desc: "Shiny, decorative filament with poor strength. Used for visual models." },
+    { name: "Silk PLA", desc: "Shiny, decorative filament with poor strength. Used for visual models. <em>It looks great from across the room, which is good because that’s where it’ll be — since it can’t handle stress or heat.</em>" },
     { name: "PLA", desc: "Very easy to print, stiff, but brittle and not heat-resistant." }
   ],
   "C": [
@@ -169,9 +140,9 @@ const data = {
     { name: "PP", desc: "Lightweight and tough, but impossible to adhere to the bed." },
     { name: "HDPE", desc: "Warps aggressively, doesn’t stick to bed, poor layer bonding." },
     { name: "TPI", desc: "Highest heat resistance, impossible to print on hobby machines." },
-    { name: "ULTEM 9085", desc: "Inferior to 1010 in every way, still expensive." },
-    { name: "Metal PLA", desc: "Contains real metal powder, but weak, brittle, and very costly." },
-    { name: "TPE", desc: "Very stretchy, but poor print quality and hard to control." }
+    { name: "ULTEM 9085", desc: "Inferior to 1010 in every way, still expensive. <em>This is the champagne of thermoplastics… if the champagne had already gone flat.</em>" },
+    { name: "Metal PLA", desc: "Contains real metal powder, but weak, brittle, and very costly. <em>Yes, it’s got real metal in it. And that’s exactly how it feels… when it snaps in half and cuts you.</em>" },
+    { name: "TPE", desc: "Very stretchy, but poor print quality and hard to control. <em>Very stretchy, but poor print quality and hard to control.</em>" }
   ]
 };
 
@@ -194,11 +165,13 @@ function createTable() {
 
 function showModal(title, text) {
   document.getElementById("modal-title").textContent = title;
-  document.getElementById("modal-text").textContent = text;
+  document.getElementById("modal-text").innerHTML = text;
   document.getElementById("modal").style.display = "block";
+
   window.onclick = function(event) {
-    if (event.target === document.getElementById("modal")) {
-      hideModal();
+    const modal = document.getElementById("modal");
+    if (event.target === modal) {
+      modal.style.display = "none";
     }
   };
 }
@@ -209,5 +182,33 @@ function hideModal() {
 
 createTable();
 </script>
+
+<script type="module">
+  import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js';
+  import { getDatabase, ref, runTransaction } from 'https://www.gstatic.com/firebasejs/9.23.0/firebase-database.js';
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyBQ5LyqiPsul7Z4ih6tqxMA1wDDd7gIEyA",
+    authDomain: "hitcounter-f82d6.firebaseapp.com",
+    projectId: "hitcounter-f82d6",
+    databaseURL: "https://hitcounter-f82d6-default-rtdb.firebaseio.com",
+    storageBucket: "hitcounter-f82d6.appspot.com",
+    messagingSenderId: "36462497980",
+    appId: "1:36462497980:web:842fbf1340158595a440b9"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const db = getDatabase(app);
+  const counterRef = ref(db, 'visits');
+
+  runTransaction(counterRef, (current) => {
+    return (current || 0) + 1;
+  }).then(result => {
+    document.getElementById('visitor-counter').textContent = `Visitor count: ${result.snapshot.val()}`;
+  }).catch(() => {
+    document.getElementById('visitor-counter').textContent = 'Visitor count unavailable.';
+  });
+</script>
+
 </body>
 </html>
